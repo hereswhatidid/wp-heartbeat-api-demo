@@ -35,12 +35,12 @@ Default interval is 15 seconds.  When the current window loses focus it changes 
 
 #### jQuery Events:
 
-* heartbeat-connection-lost - Connection error, has one parameter [error], contains error message information
-* heartbeat-connection-restored - Connection has been restored AFTER a connection lost error
-* heartbeat-send - Information is sent to the server, has one parameter [data] that contains the data to be sent, can be modified via the event
-* heartbeat-nonces-expired - nonces have expired
-* heartbeat-tick
-* heartbeat-error
+* **heartbeat-connection-lost** - Connection error, has one parameter [error], contains error message information
+* **heartbeat-connection-restored** - Connection has been restored AFTER a connection lost error
+* **heartbeat-send** - Information is sent to the server, has one parameter [data] that contains the data to be sent, can be modified via the event
+* **heartbeat-nonces-expired** - nonces have expired
+* **heartbeat-tick** - Occurs only when new data has been enqueued
+* **heartbeat-error**
 
 #### Notable methods
 
