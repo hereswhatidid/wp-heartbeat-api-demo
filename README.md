@@ -5,6 +5,32 @@ Demonstration of some features of the new Heartbeat API in WordPress 3.6
 
 Default interval is 15 seconds.  When the current window loses focus it changes to 120 seconds.
 
+#### Filters
+
+* **heartbeat_nopriv_received** - applied when heartbeat data is received (not logged in)
+  - *$response* - Response sent
+  - *$data* - Data received
+  - *$screen_id* - ID of the screen the heartbeat occurred on
+* **heartbeat_nopriv_send** - applied when heartbeat data is sent (not logged in)
+  - *$response* - Response sent
+  - *$screen_id* - ID of the screen the heartbeat occurred on
+* **heartbeat_received** - applied when heartbeat data is received (logged in)
+  - *$response* - Response sent
+  - *$data* - Data received
+  - *$screen_id* - ID of the screen the heartbeat occurred on
+* **heartbeat_send** - applied when heartbeat data is sent (logged in)
+  - *$response* - Response sent
+  - *$screen_id* - ID of the screen the heartbeat occurred on
+
+#### Actions
+
+* **heartbeat_nopriv_tick** - Occurs on front end heartbeat tick (if enabled)
+  - *$response* - Response sent
+  - *$screen_id* - ID of the screen the heartbeat occurred on
+* **heartbeat_tick** - Occurs on back end (logged in) heartbeat tick
+  - *$response* - Response sent
+  - *$screen_id* - ID of the screen the heartbeat occurred on
+
 #### jQuery Events:
 
 * heartbeat-connection-lost - Connection error, has one parameter [error], contains error message information
