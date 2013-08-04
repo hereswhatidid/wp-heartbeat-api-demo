@@ -21,6 +21,8 @@ Default interval is 15 seconds.  When the current window loses focus it changes 
 * **heartbeat_send** - applied when heartbeat data is sent (logged in)
   - *$response* - Response sent
   - *$screen_id* - ID of the screen the heartbeat occurred on
+* **heartbeat_settings** - applied to the settings prior to being enabled
+  - *$settings* - array - Current available settings
 
 #### Actions
 
