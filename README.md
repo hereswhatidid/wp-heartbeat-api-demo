@@ -42,7 +42,7 @@ Default interval is 15 seconds.  When the current window loses focus it changes 
 * **heartbeat-tick** - Occurs only when new data has been enqueued
 * **heartbeat-error**
 
-#### Notable methods
+#### Notable jQuery Methods
 
 * interval( speed, ticks ) - used to get or set the interval speed.
     * **speed** - string - “fast”, “slow” or “long-polling”
