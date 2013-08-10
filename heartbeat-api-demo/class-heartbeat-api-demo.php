@@ -130,6 +130,9 @@ class HeartbeatAPIDemo {
 		if ( false === get_option( $this->plugin_slug . '_interval' ) ) {
 			add_option( $this->plugin_slug . '_interval', '15' );
 		}
+		if ( false === get_option( $this->plugin_slug . '_allpages' ) ) {
+			add_option( $this->plugin_slug . '_allpages', '' );
+		}
 	}
 
 	/**
@@ -143,6 +146,7 @@ class HeartbeatAPIDemo {
 		delete_option( $this->plugin_slug . '_logevents' );
 		delete_option( $this->plugin_slug . '_autostart' );
 		delete_option( $this->plugin_slug . '_interval' );
+		delete_option( $this->plugin_slug . '_allpages' );
 	}
 
 	/**
