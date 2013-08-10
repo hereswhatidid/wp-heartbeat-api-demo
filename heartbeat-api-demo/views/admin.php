@@ -47,5 +47,15 @@
 			<a href="#" class="button haserror">Check for Error</a>
 		</p>
 		<hr />
+		<p><strong>Spoof a tick:</strong> <code>wp.heartbeat.tick( <em>data</em>, <em>textStatus</em>, <em>jqXHR</em> );</code></p>
+		<p>
+			<a href="#" class="button spooftick">Tick!</a>
+		</p>
+		<hr />
+		<p><strong>Spoof an error:</strong> <code>wp.heartbeat.error( <em>jqXHR</em> , <em>textStatus</em>, <em>error</em> );</code></p>
+		<p>
+			<a href="#" class="button spooferror">Error!</a>
+		</p>
+		<hr />
 	</div>
 </div>

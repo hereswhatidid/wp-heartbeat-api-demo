@@ -30,11 +30,10 @@
 		 * Heartbeat tick event
 		 */
 		$(document)
-			.on( 'heartbeat-tick.heartbeatapi-demo', function( e, data, jqXHR, d ) {			
+			.on( 'heartbeat-tick.heartbeatapi-demo', function( e, data, jqXHR ) {			
 				if ( data['heartbeatapi-comments'] ) {
 					console.log( 'Event: heartbeat-tick' );
 					console.log( 'Data received: ', data );
-					console.log( 'XHR: ', d );
 					$.each( data['heartbeatapi-comments'], function( index, object ) {
 						console.log( 'Comment: ', object.comment_content );
 					})
@@ -46,7 +45,7 @@
 		 * Heartbeat error event
 		 */
 		$(document)
-			.on('heartbeat-error.heartbeatapi-demo', function(e, jqXHR, textStatus, error) {
+			.on('heartbeat-error.heartbeatapi-demo', function( e, jqXHR, textStatus, error ) {
 				console.log( 'Event: heartbeat-error' );
 				console.log( textStatus );
 				console.log( error );
@@ -92,6 +91,18 @@
 				var output = wp.heartbeat.hasConnectionError( );
 
 				console.log( 'Has Error: ', output );
+			})
+			.on( 'click', '.spooftick', function( e ) {
+				e.preventDefault();
+
+				var output = wp.heartbeat.tick( { 'heartbeatapi-comments': [] }, 'success', wp.heartbeat.xhr );
+
+			})
+			.on( 'click', '.spooferror', function( e ) {
+				e.preventDefault();
+
+				var output = wp.heartbeat.error( wp.heartbeat.xhr, 'error', 'parsererror' );
+
 			})
 	});
 }(jQuery));
