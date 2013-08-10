@@ -30,10 +30,11 @@
 		 * Heartbeat tick event
 		 */
 		$(document)
-			.on( 'heartbeat-tick.heartbeatapi-demo', function( e, data ) {			
+			.on( 'heartbeat-tick.heartbeatapi-demo', function( e, data, jqXHR, d ) {			
 				if ( data['heartbeatapi-comments'] ) {
 					console.log( 'Event: heartbeat-tick' );
 					console.log( 'Data received: ', data );
+					console.log( 'XHR: ', d );
 					$.each( data['heartbeatapi-comments'], function( index, object ) {
 						console.log( 'Comment: ', object.comment_content );
 					})

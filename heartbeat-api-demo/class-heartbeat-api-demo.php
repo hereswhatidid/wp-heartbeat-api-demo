@@ -208,6 +208,16 @@ class HeartbeatAPIDemo {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+		if ( get_option( $this->plugin_slug . '_allpages' ) !== '1' ) {
+			if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
+				return;
+			}
+
+			$screen = get_current_screen();
+			if ( $screen->base !== $this->plugin_screen_hook_suffix ) {
+				return;
+			}
+		}
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'js/public.js', __FILE__ ), array( 'jquery' ), $this->version );
 	}
 
@@ -245,6 +255,9 @@ class HeartbeatAPIDemo {
 		if ( false === get_option( $this->plugin_slug . '_interval' ) ) {
 			add_option( $this->plugin_slug . '_interval', '15' );
 		}
+		if ( false === get_option( $this->plugin_slug . '_allpages' ) ) {
+			add_option( $this->plugin_slug . '_allpages', '' );
+		}
 
 		add_settings_section(
 			$this->plugin_slug . '_settings_section',
@@ -256,10 +269,11 @@ class HeartbeatAPIDemo {
 		add_settings_field(
 			$this->plugin_slug . '_logevents',
 			__( 'Log events', $this->plugin_slug ),
-			array( $this, 'settings_logevents_callback' ),
+			array( $this, 'settings_checkbox_callback' ),
 			$this->plugin_screen_hook_suffix,
 			$this->plugin_slug . '_settings_section',
 			array(
+				$this->plugin_slug . '_logevents',
 				__( 'The Heartbeat API events will be logged to your browser\'s console.', $this->plugin_slug )
 			)
 		);
@@ -267,10 +281,11 @@ class HeartbeatAPIDemo {
 		add_settings_field(
 			$this->plugin_slug . '_autostart',
 			__( 'Autostart', $this->plugin_slug ),
-			array( $this, 'settings_autostart_callback' ),
+			array( $this, 'settings_checkbox_callback' ),
 			$this->plugin_screen_hook_suffix,
 			$this->plugin_slug . '_settings_section',
 			array(
+				$this->plugin_slug . '_autostart',
 				__( 'Start the Heartbeat automatically on page load.', $this->plugin_slug )
 			)
 		);
@@ -283,6 +298,18 @@ class HeartbeatAPIDemo {
 			$this->plugin_slug . '_settings_section',
 			array(
 				__( 'Value must be between 15-60.', $this->plugin_slug )
+			)
+		);
+
+		add_settings_field(
+			$this->plugin_slug . '_allpages',
+			__( 'Run on all pages', $this->plugin_slug ),
+			array( $this, 'settings_checkbox_callback' ),
+			$this->plugin_screen_hook_suffix,
+			$this->plugin_slug . '_settings_section',
+			array(
+				$this->plugin_slug . '_allpages',
+				__( 'Run the demo scripts on entire site.', $this->plugin_slug )
 			)
 		);
 
@@ -301,6 +328,11 @@ class HeartbeatAPIDemo {
 			$this->plugin_slug . '_interval'
 		);
 
+		register_setting(
+			$this->plugin_screen_hook_suffix,
+			$this->plugin_slug . '_allpages'
+		);
+
 	}
 
 	/**
@@ -312,34 +344,6 @@ class HeartbeatAPIDemo {
 	/**
 	* Callback for the Log Events field
 	*/
-	public function settings_logevents_callback( $args ) {
-
-		$value = get_option( $this->plugin_slug . '_logevents' );
-		$fieldname = $this->plugin_slug . '_logevents';
-
-		$html = '<label><input type="checkbox" name="' . $fieldname . '" id="' . $fieldname . '" value="1" ' . checked( $value, 1, false ) . ' /> ';
-		$html .= $args[0] . '</label>';
-
-		echo $html;
-
-	}
-	/**
-	* Callback for the Log Events field
-	*/
-	public function settings_autostart_callback( $args ) {
-
-		$value = get_option( $this->plugin_slug . '_autostart' );
-		$fieldname = $this->plugin_slug . '_autostart';
-
-		$html = '<label><input type="checkbox" name="' . $fieldname . '" id="' . $fieldname . '" value="1" ' . checked( $value, 1, false ) . ' /> ';
-		$html .= $args[0] . '</label>';
-
-		echo $html;
-
-	}
-	/**
-	* Callback for the Log Events field
-	*/
 	public function settings_interval_callback( $args ) {
 
 		$value = get_option( $this->plugin_slug . '_interval' );
@@ -347,6 +351,20 @@ class HeartbeatAPIDemo {
 
 		$html = '<label><input type="text" name="' . $fieldname . '" id="' . $fieldname . '" value="' . $value . '" /><br />';
 		$html .= $args[0] . '</label>';
+
+		echo $html;
+
+	}
+	/**
+	* Callback for the checkbox field
+	*/
+	public function settings_checkbox_callback( $args ) {
+
+		$fieldname = $args[0];
+		$value = get_option( $fieldname );
+
+		$html = '<label><input type="checkbox" name="' . $fieldname . '" id="' . $fieldname . '" value="1" ' . checked( $value, 1, false ) . ' /> ';
+		$html .= $args[1] . '</label>';
 
 		echo $html;
 
@@ -404,5 +422,7 @@ class HeartbeatAPIDemo {
 	}
 
 	public function heartbeat_tick( $response, $screen_id ) {
+
+
 	}
 }
