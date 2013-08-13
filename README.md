@@ -5,6 +5,14 @@ Demonstration of some features of the new Heartbeat API in WordPress 3.6
 
 Default interval is 15 seconds.  When the current window loses focus it changes to 120 seconds.
 
+### Trac Description of Heartbeat API
+
+The purpose of this API is to simulate bidirectional connection between the browser and the server. Initially it will be used for autosave, post locking and log-in expiration warning while a user is writing or editing.
+
+The idea is to have a relatively simple API that sends XHR requests to the server every 15 seconds and triggers events (or callbacks) on receiving data. Other components would be able to "hitch a ride" or get notified about another user's activities.
+
+In the future this can be used to block simultaneous editing of widgets and menus or any other tasks that require regular updates from the server.
+
 #### Filters
 
 * **heartbeat_nopriv_received** - applied when heartbeat data is received (not logged in)
