@@ -121,18 +121,18 @@ class HeartbeatAPIDemo {
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
-		if ( false === get_option( $this->plugin_slug . '_logevents' ) ) {
-			add_option( $this->plugin_slug . '_logevents', '' );
-		}
-		if ( false === get_option( $this->plugin_slug . '_autostart' ) ) {
-			add_option( $this->plugin_slug . '_autostart', '1' );
-		}
-		if ( false === get_option( $this->plugin_slug . '_interval' ) ) {
-			add_option( $this->plugin_slug . '_interval', '15' );
-		}
-		if ( false === get_option( $this->plugin_slug . '_allpages' ) ) {
-			add_option( $this->plugin_slug . '_allpages', '' );
-		}
+		// if ( false === get_option( $this->plugin_slug . '_logevents' ) ) {
+		// 	add_option( $this->plugin_slug . '_logevents', '' );
+		// }
+		// if ( false === get_option( $this->plugin_slug . '_autostart' ) ) {
+		// 	add_option( $this->plugin_slug . '_autostart', '1' );
+		// }
+		// if ( false === get_option( $this->plugin_slug . '_interval' ) ) {
+		// 	add_option( $this->plugin_slug . '_interval', '15' );
+		// }
+		// if ( false === get_option( $this->plugin_slug . '_allpages' ) ) {
+		// 	add_option( $this->plugin_slug . '_allpages', '' );
+		// }
 	}
 
 	/**
@@ -143,10 +143,10 @@ class HeartbeatAPIDemo {
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Deactivate" action, false if WPMU is disabled or plugin is deactivated on an individual blog.
 	 */
 	public static function deactivate( $network_wide ) {
-		delete_option( $this->plugin_slug . '_logevents' );
-		delete_option( $this->plugin_slug . '_autostart' );
-		delete_option( $this->plugin_slug . '_interval' );
-		delete_option( $this->plugin_slug . '_allpages' );
+		// delete_option( $this->plugin_slug . '_logevents' );
+		// delete_option( $this->plugin_slug . '_autostart' );
+		// delete_option( $this->plugin_slug . '_interval' );
+		// delete_option( $this->plugin_slug . '_allpages' );
 	}
 
 	/**
